@@ -1,9 +1,11 @@
 <h1>ごはん一覧</h1>
 <% @dishes.each do |dish| %>
+	<div class="gohan">
 	<ol>
 			<li><%= dish.name %></li>
 			<li><%= dish.recipe %></li>
 			<li><%= dish.url %></li>
 			<li><%= dish.memo %></li>
 	</ol>
+	</div>
 <% end %>
