@@ -2,7 +2,6 @@
 <% @dishes.each do |dish| %>
 	<div class="gohan">
 		<h3><a href=<%= dish_path(dish) %>><%= dish.name %></a></h3>
-		<p><%= dish.recipe %></p>
 		<p><a href=<%= dish.url %>><%= dish.url %></a></p>
 		<p><%= dish.memo %></p>
 	</div>
