@@ -1,11 +1,9 @@
 <h1>ごはん一覧</h1>
 <% @dishes.each do |dish| %>
 	<div class="gohan">
-	<ol>
-			<li><%= dish.name %></li>
-			<li><%= dish.recipe %></li>
-			<li><a href=<%= dish.url %>><%= dish.url %></a></li>
-			<li><%= dish.memo %></li>
-	</ol>
+		<h3><a href=<%= dish_path(dish) %>><%= dish.name %></a></h3>
+		<p><%= dish.recipe %></p>
+		<p><a href=<%= dish.url %>><%= dish.url %></a></p>
+		<p><%= dish.memo %></p>
 	</div>
 <% end %>
