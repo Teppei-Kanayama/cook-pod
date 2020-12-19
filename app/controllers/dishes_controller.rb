@@ -8,14 +8,22 @@ class DishesController < ApplicationController
   end
   
   def new
+    @dish  = Dish.new
   end
   
   def create
+    @dish = Dish.new(dish_params)
+    if @dish.save
+      render 'index'
+    else
+      render 'new'
+    end
   end
   
-  def edit
-  end
-  
-  def delete
-  end
+  private
+
+    # マスアサインメント対策
+    def dish_params
+      params.require(:dish).permit(:name, :url, :memo)
+    end
 end

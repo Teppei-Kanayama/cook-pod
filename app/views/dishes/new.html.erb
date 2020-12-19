@@ -1,11 +1,18 @@
 <h1>新しいごはんの追加</h1>
 
-<p>料理名</p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@dish, url: dishes_path) do |f| %>
+      <%= f.label :name, "料理名" %>
+      <%= f.text_field :name %>
 
-<input>
+      <%= f.label :url, "URL" %>
+      <%= f.url_field :url %>
+      
+      <%= f.label :memo, "メモ" %>
+      <%= f.text_field :memo %>
 
-<p>URL</p>
-
-<input>
-
-<input class="contact-submit" type="submit" value="送信">
+      <%= f.submit "登録", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

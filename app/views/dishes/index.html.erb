@@ -1,5 +1,5 @@
 <h1>ごはん一覧</h1>
-<% @dishes.each do |dish| %>
+<% @dishes.reverse_each do |dish| %>
 	<div class="gohan">
 		<h3><a href=<%= dish_path(dish) %>><%= dish.name %></a></h3>
 		<p><a href=<%= dish.url %>><%= dish.url %></a></p>
