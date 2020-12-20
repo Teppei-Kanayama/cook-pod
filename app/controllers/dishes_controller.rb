@@ -16,6 +16,7 @@ class DishesController < ApplicationController
     if @dish.save
       render 'index'
     else
+      # TODO: エラーメッセージ
       render 'new'
     end
   end
