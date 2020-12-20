@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get '/record', to: 'dish_images#new'
+  post '/record', to: 'dish_images#create'
 
   get '/recommend', to: 'static_pages#recommend'
 

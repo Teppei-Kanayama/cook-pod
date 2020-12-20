@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201220010017) do
+ActiveRecord::Schema.define(version: 20201220023416) do
 
   create_table "dish_images", force: :cascade do |t|
-    t.integer "imega_id"
     t.string "filename"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dish_id"
   end
 
   create_table "dishes", force: :cascade do |t|
