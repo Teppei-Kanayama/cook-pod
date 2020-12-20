@@ -6,9 +6,9 @@ class DishImagesController < ApplicationController
   def create
     @dish_image = DishImage.new(dish_image_params)
     if @dish_image.save
-      # TODO: 詳細ページにリダイレクト
-      @dishes = Dish.all
-      render 'dishes/index'
+      dish_id = params[:dish_image][:dish_id]
+      dish = Dish.find_by_id(dish_id)
+      redirect_to dish_url(dish)
     else
       # TODO: エラーメッセージ
       render 'new'
