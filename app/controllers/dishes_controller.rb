@@ -4,7 +4,10 @@ class DishesController < ApplicationController
   end
   
   def show
-    @dish = Dish.find(params[:id])
+    dish_id = params[:id]
+    @dish = Dish.find(dish_id)
+    @dish_images = DishImage.where(dish_id: dish_id).to_ary()
+    
   end
   
   def new
