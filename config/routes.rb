@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/record', to: 'dish_images#new'
+
   get '/recommend', to: 'static_pages#recommend'
 
   get '/calendar', to: 'static_pages#calendar'
