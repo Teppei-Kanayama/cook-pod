@@ -7,6 +7,11 @@ class DishImagesController < ApplicationController
     dish_id = params[:dish_image][:dish_id]
     filename = ('a'..'z').to_a.shuffle[0..7].join
     @dish_image = DishImage.new(dish_id: dish_id, filename: filename)
+    
+    # save image
+    image = params[:dish_image][:image]
+    File.binwrite("public/dish_images/#{@dish_image.filename}", image.read)
+    
     if @dish_image.save
       dish = Dish.find_by_id(dish_id)
       redirect_to dish_url(dish)

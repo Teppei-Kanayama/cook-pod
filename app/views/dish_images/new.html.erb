@@ -5,7 +5,9 @@
     <%= form_for(@dish_image, url: record_path) do |f| %>
       <%= f.label :dish_id, "料理ID" %>
       <%= f.text_field :dish_id %>
-      <input name="image" type="file">
+      
+      <%= f.file_field :image %>
+      <!--<input name="image" type="file">-->
 
       <!--<%= f.label :filename, "画像ファイル名" %>-->
       <!--<%= f.text_field :filename %>-->
