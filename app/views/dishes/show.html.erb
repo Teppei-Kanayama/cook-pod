@@ -6,5 +6,5 @@
 
 <h3>料理の画像</h3>
 <% @dish_images.each do |dish_image| %>
-    <p><%= dish_image.filename %></p>
+    <img src="<%= "/dish_images/#{dish_image.filename}" %>" width="100">
 <% end %>
