@@ -1,8 +1,11 @@
 <h1>ごはん一覧</h1>
-<% @dishes.reverse_each do |dish| %>
+<% @dishes.each do |dish| %>
 	<div class="gohan">
-		<h3><a href=<%= dish_path(dish) %>><%= dish.name %></a></h3>
-		<p><a href=<%= dish.url %>><%= dish.url %></a></p>
-		<p><%= dish.memo %></p>
+		<% if dish[:image] != nil %>
+			<img src="<%= "/dish_images/#{dish[:image].filename}" %>" width="100">
+		<% end %>
+		<h3><a href=<%= dish_path(dish) %>><%= dish[:name] %></a></h3>
+		<p><a href=<%= dish[:url] %>><%= dish[:url] %></a></p>
+		<p><%= dish[:memo] %></p>
 	</div>
 <% end %>
