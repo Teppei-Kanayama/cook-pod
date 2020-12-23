@@ -3,7 +3,7 @@
 	<div class="gohan">
 		<div class="gohan-image">
 			<% if dish[:image] != nil %>
-				<img src="<%= "/dish_images/#{dish[:image].filename}" %>" width="100">
+				<a href=<%= dish_path(dish) %>><img src="<%= "/dish_images/#{dish[:image].filename}" %>" width="100"></a>
 			<% end %>
 		</div>
 		<div class="gohan-content">
