@@ -1,11 +1,15 @@
 <h1>ごはん一覧</h1>
 <% @dishes.each do |dish| %>
 	<div class="gohan">
-		<% if dish[:image] != nil %>
-			<img src="<%= "/dish_images/#{dish[:image].filename}" %>" width="100">
-		<% end %>
-		<h3><a href=<%= dish_path(dish) %>><%= dish[:name] %></a></h3>
-		<p><a href=<%= dish[:url] %>><%= dish[:url] %></a></p>
-		<p><%= dish[:memo] %></p>
+		<div class="gohan-image">
+			<% if dish[:image] != nil %>
+				<img src="<%= "/dish_images/#{dish[:image].filename}" %>" width="100">
+			<% end %>
+		</div>
+		<div class="gohan-content">
+			<h3><a href=<%= dish_path(dish) %>><%= dish[:name] %></a></h3>
+			<p><a href=<%= dish[:url] %>><%= dish[:url] %></a></p>
+			<p><%= dish[:memo] %></p>
+		</div>
 	</div>
 <% end %>
