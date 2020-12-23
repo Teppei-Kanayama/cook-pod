@@ -5,12 +5,11 @@ class DishImagesController < ApplicationController
   
   def create
     dish_id = params[:dish_image][:dish_id]
-    filename = ('a'..'z').to_a.shuffle[0..7].join
-    @dish_image = DishImage.new(dish_id: dish_id, filename: filename)
+    image_binary = params[:dish_image][:image]
     
-    # save image
-    image = params[:dish_image][:image]
-    File.binwrite("public/dish_images/#{@dish_image.filename}", image.read)
+    filename = generate_random_filename()
+    save_image(image_binary, filename)
+    @dish_image = DishImage.new(dish_id: dish_id, filename: filename)
     
     if @dish_image.save
       dish = Dish.find_by_id(dish_id)
@@ -21,10 +20,13 @@ class DishImagesController < ApplicationController
     end
   end
   
-  # private
+  private
+    def generate_random_filename()
+      return ('a'..'z').to_a.shuffle[0..7].join
+    end
 
-  #   # マスアサインメント対策
-  #   def dish_image_params
-  #     params.require(:dish_image).permit(:dish_id, :filename)
-  #   end
+    def save_image(image_binary, filename)
+      File.binwrite("public/dish_images/#{filename}", image_binary.read)
+    end
+
 end
