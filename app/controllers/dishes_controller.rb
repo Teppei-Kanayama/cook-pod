@@ -16,7 +16,7 @@ class DishesController < ApplicationController
   def create
     @dish = Dish.new(dish_params)
     if @dish.save
-      flash[:success] = "正常に登録されました！おつかれさば"
+      flash.now[:success] = "正常に登録されました！おつかれさば"  # nowが必要な時と必要でない時の違いがわからない
       @dishes = get_index_dishes()
       render 'index'
     else

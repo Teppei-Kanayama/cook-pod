@@ -12,6 +12,7 @@ class DishImagesController < ApplicationController
     @dish_image = DishImage.new(dish_id: dish_id, filename: filename)
     
     if @dish_image.save
+      flash[:success] = "正常に登録されました！えらい！"   # nowが必要な時と必要でない時の違いがわからない
       dish = Dish.find_by_id(dish_id)
       redirect_to dish_url(dish)
     else
