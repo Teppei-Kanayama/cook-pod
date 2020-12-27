@@ -1,19 +1,12 @@
 class DishesController < ApplicationController
   def index
-    @dishes = []
-    Dish.all.reverse_each do |dish|
-      dish_id = dish.id
-      last_image_filename = DishImage.where(dish_id: dish_id).to_ary()[-1]
-      dish_dict = {id: dish_id, name: dish.name, url: dish.url, memo: dish.memo, image: last_image_filename}
-      @dishes.append dish_dict
-    end
+    @dishes = get_index_dishes()
   end
   
   def show
     dish_id = params[:id]
     @dish = Dish.find(dish_id)
     @dish_images = DishImage.where(dish_id: dish_id).to_ary()
-    
   end
   
   def new
@@ -23,6 +16,8 @@ class DishesController < ApplicationController
   def create
     @dish = Dish.new(dish_params)
     if @dish.save
+      flash[:success] = "正常に登録されました！おつかれさば"
+      @dishes = get_index_dishes()
       render 'index'
     else
       # TODO: エラーメッセージ
