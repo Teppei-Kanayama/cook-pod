@@ -7,6 +7,13 @@ class DishImagesController < ApplicationController
     dish_id = params[:dish_image][:dish_id]
     image_binary = params[:dish_image][:image]
     
+    if image_binary == nil
+      flash.now[:danger] = "画像を選択してください。"
+      @dish_image = DishImage.new
+      render 'new'
+      return
+    end
+    
     filename = generate_random_filename()
     save_image(image_binary, filename)
     @dish_image = DishImage.new(dish_id: dish_id, filename: filename)
@@ -16,7 +23,6 @@ class DishImagesController < ApplicationController
       dish = Dish.find_by_id(dish_id)
       redirect_to dish_url(dish)
     else
-      # TODO: エラーメッセージ
       render 'new'
     end
   end

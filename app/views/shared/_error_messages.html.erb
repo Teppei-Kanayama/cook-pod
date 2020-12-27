@@ -1,0 +1,12 @@
+<% if @dish_image.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+     <%= @dish_image.errors.count %>個のエラーが存在します。
+    </div>
+    <ul>
+    <% @dish_image.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
