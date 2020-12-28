@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      dish: 料理
+    attributes:
+      dish:
+        name: 料理名
+        url: URL
+        memo: メモ
