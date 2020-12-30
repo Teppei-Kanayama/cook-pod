@@ -2,19 +2,6 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@dish, url: dishes_path) do |f| %>
-       <%= render 'shared/dish_error_messages' %>
-    
-      <%= f.label :name, "料理名" %>
-      <%= f.text_field :name %>
-
-      <%= f.label :url, "URL" %>
-      <%= f.url_field :url %>
-      
-      <%= f.label :memo, "メモ" %>
-      <%= f.text_field :memo %>
-
-      <%= f.submit "登録", class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'form' %>
   </div>
 </div>
