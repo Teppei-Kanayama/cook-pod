@@ -1,4 +1,4 @@
-<%= form_for(@dish, url: dishes_path) do |f| %>
+<%= form_for(@dish, url: yield(:form_for)) do |f| %>
   <%= render 'shared/dish_error_messages' %>
 
   <%= f.label :name, "料理名" %>

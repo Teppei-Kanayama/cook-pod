@@ -29,6 +29,16 @@ class DishesController < ApplicationController
     @dish = Dish.find(params[:id])
   end
   
+  def update
+    @dish = Dish.find(params[:id])
+    if @dish.update_attributes(dish_params)
+      flash[:success] = "正常に編集されました！すやすや"
+      redirect_to @dish
+    else
+      render 'edit'
+    end
+  end
+  
   private
 
     # マスアサインメント対策
