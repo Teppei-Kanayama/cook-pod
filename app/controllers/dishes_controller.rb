@@ -41,6 +41,7 @@ class DishesController < ApplicationController
   def destroy
     dish_id = params[:id]
     dish = Dish.find(dish_id)
+    # 画像が登録されている料理を消すと、DishImages側は削除されずに不整合になってしまうので、いったんエラー処理
     if DishImage.where(dish_id: dish_id)
       flash[:alert] = "画像が登録されている料理は消せません。"
       redirect_to dish_url(dish)
