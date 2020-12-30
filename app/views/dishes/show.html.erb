@@ -8,3 +8,5 @@
 <% @dish_images.each do |dish_image| %>
     <img src="<%= "/dish_images/#{dish_image.filename}" %>" width="100">
 <% end %>
+
+<p><%= link_to "編集", edit_dish_path(@dish) %></p>

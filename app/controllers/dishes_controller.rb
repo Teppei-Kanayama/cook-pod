@@ -25,6 +25,10 @@ class DishesController < ApplicationController
     end
   end
   
+  def edit
+    @dish = Dish.find(params[:id])
+  end
+  
   private
 
     # マスアサインメント対策
