@@ -15,3 +15,5 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      secret_key_base: daae28478850432d72f315cf11c90f84988fb19f156dd917ce6b773c07d79366a33e86274593bf7b48f72933bc90ff59a95bf589a0dca07ae95
