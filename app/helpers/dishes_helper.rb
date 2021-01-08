@@ -9,4 +9,11 @@ module DishesHelper
      end
     return dishes
 	end
+
+	def get_show_dish(dish_id)
+		dish = Dish.find(dish_id)
+		dish_images = DishImage.where(dish_id: dish_id).to_ary()
+		# TODO: 料理画像も返す(どういう形式で返すのがいい？)
+		return dish
+	end
 end

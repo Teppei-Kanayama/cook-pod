@@ -11,12 +11,9 @@ class DishesController < ApplicationController
   def show
     dish_id = params[:id].to_i
     if Dish.ids.include?(dish_id)
-      @dish = Dish.find(dish_id)
-      # TODO: 料理画像も返す
-      # @dish_images = DishImage.where(dish_id: dish_id).to_ary()
-      render json: @dish
+      render json: get_show_dish(dish_id)
     else
-      render json: {"message": "404 Not Found"}  # TODO: いい感じのメッセージにする
+      render json: {"message": "404 Not Found"}
     end
   end
 
@@ -25,7 +22,7 @@ class DishesController < ApplicationController
     if @dish.save
       render json: @dish
     else
-      render json: {"message": "500 Internal Server Error"}  # TODO: いい感じのメッセージにする
+      render json: {"message": "500 Internal Server Error"}
     end
   end
 
@@ -36,26 +33,25 @@ class DishesController < ApplicationController
       if @dish.update_attributes(dish_params)
         render json: @dish
       else
-        render json: {"message": "500 Internal Server Error"}  # TODO: いい感じのメッセージにする
+        render json: {"message": "500 Internal Server Error"}
       end
     else
-      render json: {"message": "400 Bad Request"}  # TODO: いい感じのメッセージにする
+      render json: {"message": "400 Bad Request"}
     end
   end
 
   def destroy
     dish_id = params[:id].to_i
-    if Dish.ids.include?(dish_id)
+    dish_exist = Dish.ids.include?(dish_id)
+    has_no_image = DishImage.where(dish_id: dish_id).empty?
+    if dish_exist && has_no_image
       dish = Dish.find(dish_id)
-      # 画像が登録されている料理を消すと、DishImages側は削除されずに不整合になってしまうので、いったんエラー処理
-      # if DishImage.where(dish_id: dish_id)
-      #   redirect_to dish_url(dish)
-      #   return
-      # end
       dish.destroy
       render json: {"message": "204 Resource Deleted Successfully"}
-    else
-      render json: {"message": "400 Bad Request"}  # TODO: いい感じのメッセージにする
+    elsif not dish_exist
+      render json: {"message": "400 Bad Request. The dish doesn't exist."}
+    elsif not has_no_image  # 画像が登録されている料理を消すと、DishImages側は削除されずに不整合になってしまうので、いったんエラー処理
+      render json: {"message": "400 Bad Request. A dish with image cannot be destroyed."}
     end
   end
 
