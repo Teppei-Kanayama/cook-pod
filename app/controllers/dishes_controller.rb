@@ -5,13 +5,15 @@ class DishesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @dishes = get_index_dishes()
+    # TODO: 料理画像も返す
+    render json: Dish.all
+    # @dishes = get_index_dishes()
   end
 
   def show
     dish_id = params[:id]
     @dish = Dish.find(dish_id)
-    # TODO: return dish images
+    # TODO: 料理画像も返す
     # @dish_images = DishImage.where(dish_id: dish_id).to_ary()
     render json: @dish
   end
