@@ -30,26 +30,33 @@ class DishesController < ApplicationController
   end
 
   def update
-    @dish = Dish.find(params[:id])
-    if @dish.update_attributes(dish_params)
-      render json: @dish
+    dish_id = params[:id].to_i
+    if Dish.ids.include?(dish_id)
+      @dish = Dish.find(dish_id)
+      if @dish.update_attributes(dish_params)
+        render json: @dish
+      else
+        render json: {"message": "500 Internal Server Error"}  # TODO: いい感じのメッセージにする
+      end
     else
-      render json: {"message": "500 Internal Server Error"}  # TODO: いい感じのメッセージにする
+      render json: {"message": "400 Bad Request"}  # TODO: いい感じのメッセージにする
     end
   end
 
   def destroy
-    dish_id = params[:id]
-    dish = Dish.find(dish_id)
-    # 画像が登録されている料理を消すと、DishImages側は削除されずに不整合になってしまうので、いったんエラー処理
-    # if DishImage.where(dish_id: dish_id)
-    #   flash[:alert] = "画像が登録されている料理は消せません。"
-    #   redirect_to dish_url(dish)
-    #   return
-    # end
-    dish.destroy
-    # TODO: 失敗した場合のエラーハンドリング（存在しないリソースが指定された場合など）
-    render json: {"message": "204 Resource Deleted Successfully"}
+    dish_id = params[:id].to_i
+    if Dish.ids.include?(dish_id)
+      dish = Dish.find(dish_id)
+      # 画像が登録されている料理を消すと、DishImages側は削除されずに不整合になってしまうので、いったんエラー処理
+      # if DishImage.where(dish_id: dish_id)
+      #   redirect_to dish_url(dish)
+      #   return
+      # end
+      dish.destroy
+      render json: {"message": "204 Resource Deleted Successfully"}
+    else
+      render json: {"message": "400 Bad Request"}  # TODO: いい感じのメッセージにする
+    end
   end
 
   private
