@@ -1,4 +1,9 @@
 class DishesController < ApplicationController
+  # local開発でCan't verify CSRF token authenticityと言われてしまうことへの対策
+  # https://qiita.com/nishina555/items/4ffaf5cc57a384b66230
+  # セキュリティ的に大丈夫か？
+  skip_before_action :verify_authenticity_token
+
   def index
     @dishes = get_index_dishes()
   end
@@ -6,7 +11,9 @@ class DishesController < ApplicationController
   def show
     dish_id = params[:id]
     @dish = Dish.find(dish_id)
-    @dish_images = DishImage.where(dish_id: dish_id).to_ary()
+    # TODO: return dish images
+    # @dish_images = DishImage.where(dish_id: dish_id).to_ary()
+    render json: @dish
   end
 
   def new

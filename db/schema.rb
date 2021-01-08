@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20201220023416) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "dish_images", force: :cascade do |t|
     t.string "filename"
     t.datetime "created_at", null: false
