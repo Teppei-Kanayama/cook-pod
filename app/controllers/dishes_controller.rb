@@ -23,7 +23,6 @@ class DishesController < ApplicationController
   def create
     @dish = Dish.new(dish_params)
     if @dish.save
-      flash.now[:success] = "正常に登録されました！おつかれさば"  # nowが必要な時と必要でない時の違いがわからない
       @dishes = get_index_dishes()
       render 'index'
     else
@@ -38,7 +37,6 @@ class DishesController < ApplicationController
   def update
     @dish = Dish.find(params[:id])
     if @dish.update_attributes(dish_params)
-      flash[:success] = "正常に編集されました！すやすや"
       redirect_to @dish
     else
       render 'edit'
@@ -55,7 +53,6 @@ class DishesController < ApplicationController
     #   return
     # end
     dish.destroy
-    flash[:success] = "正常に削除されました！ない"
     redirect_to root_url
   end
 
