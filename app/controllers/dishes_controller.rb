@@ -16,34 +16,25 @@ class DishesController < ApplicationController
       # @dish_images = DishImage.where(dish_id: dish_id).to_ary()
       render json: @dish
     else
-      render json: {"message": "404 not found"}
+      render json: {"message": "404 Not Found"}  # TODO: いい感じのメッセージにする
     end
-  end
-
-  def new
-    @dish  = Dish.new
   end
 
   def create
     @dish = Dish.new(dish_params)
     if @dish.save
-      @dishes = get_index_dishes()
-      render 'index'
+      render json: @dish
     else
-      render 'new'
+      render json: {"message": "500 Internal Server Error"}  # TODO: いい感じのメッセージにする
     end
-  end
-
-  def edit
-    @dish = Dish.find(params[:id])
   end
 
   def update
     @dish = Dish.find(params[:id])
     if @dish.update_attributes(dish_params)
-      redirect_to @dish
+      render json: @dish
     else
-      render 'edit'
+      render json: {"message": "500 Internal Server Error"}  # TODO: いい感じのメッセージにする
     end
   end
 
@@ -57,7 +48,8 @@ class DishesController < ApplicationController
     #   return
     # end
     dish.destroy
-    redirect_to root_url
+    # TODO: 失敗した場合のエラーハンドリング（存在しないリソースが指定された場合など）
+    render json: {"message": "204 Resource Deleted Successfully"}
   end
 
   private
