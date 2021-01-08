@@ -5,9 +5,7 @@ class DishesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    # TODO: 料理画像も返す
-    render json: Dish.all
-    # @dishes = get_index_dishes()
+    render json: get_index_dishes()
   end
 
   def show
