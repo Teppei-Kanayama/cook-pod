@@ -9,11 +9,15 @@ class DishesController < ApplicationController
   end
 
   def show
-    dish_id = params[:id]
-    @dish = Dish.find(dish_id)
-    # TODO: 料理画像も返す
-    # @dish_images = DishImage.where(dish_id: dish_id).to_ary()
-    render json: @dish
+    dish_id = params[:id].to_i
+    if Dish.ids.include?(dish_id)
+      @dish = Dish.find(dish_id)
+      # TODO: 料理画像も返す
+      # @dish_images = DishImage.where(dish_id: dish_id).to_ary()
+      render json: @dish
+    else
+      render json: {"message": "404 not found"}
+    end
   end
 
   def new
