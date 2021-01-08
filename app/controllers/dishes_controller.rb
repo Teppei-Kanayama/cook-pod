@@ -36,7 +36,7 @@ class DishesController < ApplicationController
         render json: {"message": "500 Internal Server Error"}
       end
     else
-      render json: {"message": "400 Bad Request"}
+      render json: {"message": "400 Bad Request. The dish doesn't exist."}
     end
   end
 
