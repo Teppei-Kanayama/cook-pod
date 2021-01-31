@@ -19,14 +19,12 @@ services:
       SECRET_KEY_BASE: daae28478850432d72f315cf11c90f84988fb19f156dd917ce6b773c07d79366a33e86274593bf7b48f72933bc90ff59a95bf589a0dca07ae95
       ALLOW_CORS_ORIGIN: http://localhost:3000
     networks:
-      - cookpod
+      - cook_pod
   nginx:
-    image: 921126570142.dkr.ecr.us-west-2.amazonaws.com/cook_pod_nginx
-    deploy:
-      replicas: 2
+    image: 921126570142.dkr.ecr.us-west-2.amazonaws.com/cook_pod_nginx:latest
     depends_on:
       - web
-    environmet:
+    environment:
       WORKER_PROCESSES: 2
       WORKER_CONNECTIONS: 1024
       KEEPALIVE_TIMEOUT: 65
