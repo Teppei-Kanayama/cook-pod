@@ -18,3 +18,28 @@ services:
     environment:
       SECRET_KEY_BASE: daae28478850432d72f315cf11c90f84988fb19f156dd917ce6b773c07d79366a33e86274593bf7b48f72933bc90ff59a95bf589a0dca07ae95
       ALLOW_CORS_ORIGIN: http://localhost:3000
+    networks:
+      - cookpod
+  nginx:
+    image: 921126570142.dkr.ecr.us-west-2.amazonaws.com/cook_pod_nginx
+    deploy:
+      replicas: 2
+    depends_on:
+      - web
+    environmet:
+      WORKER_PROCESSES: 2
+      WORKER_CONNECTIONS: 1024
+      KEEPALIVE_TIMEOUT: 65
+      GZIP: "on"
+      BACKEND_HOST: localhost:3001
+      BACKEND_MAX_FAILS: 3
+      BACKEND_FAIL_TIMEOUT: 10s
+      SERVER_PORT: 80
+      SERVER_NAME: cook_pod_nginx
+      LOG_STDOUT: "true"
+    networks:
+      - cook_pod
+
+networks:
+  cook_pod:
+    external: true
