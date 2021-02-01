@@ -31,11 +31,10 @@ services:
       WORKER_CONNECTIONS: 1024
       KEEPALIVE_TIMEOUT: 65
       GZIP: "on"
-      BACKEND_HOST: 127.0.0.1:3001
+      BACKEND_HOST: 172.24.0.3:3001
       BACKEND_MAX_FAILS: 3
       BACKEND_FAIL_TIMEOUT: 10s
       SERVER_PORT: 3002
-      # SERVER_NAME: cook_pod_nginx
       LOG_STDOUT: "true"
     ports:
       - "3002:3002"
